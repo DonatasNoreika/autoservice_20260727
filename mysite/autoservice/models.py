@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Service(models.Model):
     name = models.CharField()
-    price = models.DecimalField(decimal_places=2, max_digits=4)
+    price = models.DecimalField(decimal_places=2, max_digits=8)
 
     def __str__(self):
         return self.name
@@ -14,7 +14,7 @@ class Car(models.Model):
     make = models.CharField()
     model = models.CharField()
     license_plate = models.CharField(max_length=10)
-    vin_code = models.CharField(max_length=20)
+    vin_code = models.CharField(max_length=17)
     client_name = models.CharField()
 
     def __str__(self):
