@@ -25,6 +25,15 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     car = models.ForeignKey(to="Car", on_delete=models.SET_NULL, null=True, blank=True)
 
+    LOAN_STATUS = (
+        ('d', 'Administered'),
+        ('t', 'Done'),
+        ('i', 'In Progress'),
+        ('c', 'Cancelled'),
+    )
+
+    status = models.CharField(verbose_name="Status", max_length=1, choices=LOAN_STATUS, default="d")
+
     def total(self):
         return sum(line.line_sum() for line in self.lines.all())
 
