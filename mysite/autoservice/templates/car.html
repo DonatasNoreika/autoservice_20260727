@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Automobilis{% endblock %}
+
+{% block heading %}Automobilis{% endblock %}
+
+{% block content %}
+<h1 class="display-4">{{ car.make }} {{ car.model }}</h1>
+<p><b>Valstybinis numeris: </b>{{ car.license_plate }}</p>
+<p><b>VIN numeris: </b>{{ car.vin_code }}</p>
+<p><b>Klientas: </b>{{ car.client_name }}</p>
+{% endblock %}
