@@ -9,4 +9,9 @@
 <p><b>Valstybinis numeris: </b>{{ car.license_plate }}</p>
 <p><b>VIN numeris: </b>{{ car.vin_code }}</p>
 <p><b>Klientas: </b>{{ car.client_name }}</p>
+<hr>
+<h4>Taisymai:</h4>
+{% for order in car.orders.all %}
+<p><a href="{% url 'order' order.pk %}">{{ order }}</a></p>
+{% endfor %}
 {% endblock %}
