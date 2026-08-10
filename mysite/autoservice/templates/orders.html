@@ -7,6 +7,6 @@
 {% block content %}
 <h1 class="display-4">Taisymai:</h1>
 {% for order in orders %}
-<p><a href="">{{ order }}</a></p>
+<p><a href="{{ order.pk }}">{{ order }}</a></p>
 {% endfor %}
 {% endblock %}
