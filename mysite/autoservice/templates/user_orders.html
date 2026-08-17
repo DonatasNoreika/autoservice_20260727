@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Mano taisymai{% endblock %}
+
+{% block heading %}Mano taisymai{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Mano taisymai:</h1>
+
+{% for order in orders %}
+<p>
+    <a href="{% url 'order' order.pk %}" class="{% if order.is_overdue %}text-danger{% endif %}">
+        {{ order }}
+    </a>
+</p>
+{% endfor %}
+
+{% endblock %}
