@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -24,6 +26,7 @@ class Car(models.Model):
 
 class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(null=True, blank=True)
     car = models.ForeignKey(to="Car",
                             on_delete=models.SET_NULL,
                             null=True, blank=True,
@@ -37,6 +40,10 @@ class Order(models.Model):
     )
 
     status = models.CharField(verbose_name="Status", max_length=1, choices=LOAN_STATUS, default="d")
+    client = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def is_overdue(self):
+        return self.deadline and timezone.now() > self.deadline
 
     def total(self):
         return sum(line.line_sum() for line in self.lines.all())
