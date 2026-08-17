@@ -6,7 +6,13 @@
 
 {% block content %}
 <h1 class="display-4">{{ order.car.make }} {{ order.car.model }} taisymas</h1>
+<p><b>Klientas: </b>{{ order.client }}</p>
 <p><b>Data: </b>{{ order.date }}</p>
+<p><b>Terminas: </b>
+    <span class="{% if order.is_overdue %}text-danger{% endif %}">
+        {{ order.deadline }}
+    </span>
+</p>
 <p><b>Būsena: </b>{{ order.get_status_display }}</p>
 <table class="table table-hover">
     <thead>
