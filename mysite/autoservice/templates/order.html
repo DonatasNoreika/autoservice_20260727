@@ -6,7 +6,12 @@
 
 {% block content %}
 <h1 class="display-4">{{ order.car.make }} {{ order.car.model }} taisymas</h1>
-<p><b>Klientas: </b>{{ order.client }}</p>
+<p><b>Klientas: </b>
+    {% if order.client.profile.photo %}
+    <img src="{{ order.client.profile.photo.url }}" class="rounded-circle" width="30px">
+    {% endif %}
+    {{ order.client }}
+</p>
 <p><b>Data: </b>{{ order.date }}</p>
 <p><b>Terminas: </b>
     <span class="{% if order.is_overdue %}text-danger{% endif %}">
@@ -48,7 +53,11 @@
 </form>
 {% endif %}
 {% for comment in order.comments.all %}
-<p><strong>{{ comment.author }}</strong>, <em>{{ comment.date }}</em><br>
+<p>
+{% if comment.author.profile.photo %}
+    <img src="{{ comment.author.profile.photo.url }}" class="rounded-circle" width="30px">
+{% endif %}
+<strong>{{ comment.author }}</strong>, <em>{{ comment.date }}</em><br>
     {{ comment.content }}</p>
 {% endfor %}
 {% endblock %}
