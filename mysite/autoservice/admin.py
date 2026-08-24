@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Service, Car, Order, OrderLine, OrderComment
+from .models import (Service,
+                     Car,
+                     Order,
+                     OrderLine,
+                     OrderComment,
+                     Profile)
 
 class OrderLineInLine(admin.TabularInline):
     model = OrderLine
@@ -35,3 +40,4 @@ admin.site.register(Service, ServiceAdmin)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderLine)
+admin.site.register(Profile)

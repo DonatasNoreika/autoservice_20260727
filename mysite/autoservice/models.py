@@ -4,6 +4,14 @@ from django.utils import timezone
 
 
 # Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="profile_pics", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} profile"
+
+
 class Service(models.Model):
     name = models.CharField()
     price = models.DecimalField(decimal_places=2, max_digits=8)
