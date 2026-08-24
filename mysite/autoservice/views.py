@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.views.generic.edit import FormMixin
 from .models import Service, Order, Car
 from django.views import generic
@@ -7,9 +7,26 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from .forms import OrderCommentForm
+from .forms import OrderCommentForm, UserChangeForm, ProfileChangeForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required
+def profile(request):
+    u_form = UserChangeForm(request.POST or None, instance=request.user)
+    p_form = ProfileChangeForm(request.POST or None, request.FILES, instance=request.user.profile)
+    if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        return redirect("profile")
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, template_name="profile.html", context=context)
+
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
