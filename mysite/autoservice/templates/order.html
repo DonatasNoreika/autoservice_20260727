@@ -24,7 +24,11 @@
     <a class="btn btn-warning" href="{% url 'user_orders_update' order.pk %}">Redaguoti</a>
     <a class="btn btn-danger" href="{% url 'user_orders_delete' order.pk %}">Ištrinti</a>
 </div>
+<div>
+    <a class="btn btn-secondary" href="{% url 'user_orderline_create' order.pk %}">Pridėti paslaugą</a>
+</div>
 {% endif %}
+<div class="table-responsive">
 <table class="table table-hover">
     <thead>
     <tr>
@@ -32,6 +36,9 @@
         <th>Kaina</th>
         <th>Kiekis</th>
         <th>Suma</th>
+        {% if order.client == user %}
+        <th></th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -41,14 +48,24 @@
         <td>{{ line.service.price }}</td>
         <td>{{ line.qty }}</td>
         <td>{{ line.line_sum }}</td>
+        {% if order.client == user %}
+        <td>
+            <a href="{% url 'user_orderline_update' line.pk %}" class="btn btn-warning btn-sm">Redaguoti</a>
+            <a href="{% url 'user_orderline_delete' line.pk %}" class="btn btn-danger btn-sm">Ištrinti</a>
+        </td>
+        {% endif %}
     </tr>
     {% endfor %}
     <tr>
         <th colspan="3">BENDRA SUMA:</th>
         <th>{{ order.total }}</th>
+        {% if order.client == user %}
+        <th></th>
+        {% endif %}
     </tr>
     </tbody>
 </table>
+</div>
 <h3>Komentarai:</h3>
 {% if user.is_authenticated %}
 <form method="post" class="mb-2">
