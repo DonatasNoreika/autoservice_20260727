@@ -6,7 +6,9 @@
 
 {% block content %}
 <h1 class="display-4">Mano taisymai:</h1>
-
+<div class="my-2">
+    <a class="btn btn-primary" href="{% url 'user_orders_create' %}">Sukurti naują taisymą</a>
+</div>
 {% for order in orders %}
 <p>
     <a href="{% url 'order' order.pk %}" class="{% if order.is_overdue %}text-danger{% endif %}">

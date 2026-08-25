@@ -72,6 +72,8 @@ class Order(models.Model):
     def __str__(self):
         return f"{self.car.make} {self.car.model} ({self.date})"
 
+    class Meta:
+        ordering = ['-pk']
 
 class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", on_delete=models.CASCADE, related_name="lines")
