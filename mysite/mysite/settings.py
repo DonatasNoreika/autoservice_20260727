@@ -16,7 +16,9 @@ from .my_settings import (SECRET_KEY,
                           DEBUG,
                           ALLOWED_HOSTS,
                           EMAIL_HOST_USER,
-                          EMAIL_HOST_PASSWORD)
+                          EMAIL_HOST_PASSWORD,
+                          STATICFILES_DIRS,
+                          STATIC_ROOT)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,6 +128,10 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = STATIC_ROOT
+
+STATICFILES_DIRS = STATICFILES_DIRS
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'autoservice/media')
 
